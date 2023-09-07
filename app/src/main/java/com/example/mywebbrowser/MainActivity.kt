@@ -2,6 +2,7 @@ package com.example.mywebbrowser
 
 import android.os.Bundle
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -91,7 +92,10 @@ fun MyWebView(viewModel: MainViewModel) {
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = {
-            WebView(it)
+            val webView = WebView(it)
+            webView.settings.javaScriptEnabled = true
+            webView.webViewClient = WebViewClient()
+            webView
         },
         update = { webView ->
             webView.loadUrl(viewModel.url.value)
